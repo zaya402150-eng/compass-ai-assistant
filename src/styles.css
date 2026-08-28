@@ -880,3 +880,32 @@
   border: 1px solid color-mix(in oklab, var(--care) 22%, transparent);
   box-shadow: var(--shadow-card-hover);
 }
+
+/* Sticky Caddy assistant launcher */
+.caddy-magic-btn {
+  isolation: isolate;
+  box-shadow: var(--shadow-glow), 0 12px 30px -12px color-mix(in oklab, var(--care) 60%, transparent);
+}
+.caddy-magic-btn > * {
+  z-index: 1;
+}
+
+/* Patient reviews — foil-edged luxe surfaces */
+.review-lux {
+  position: relative;
+  isolation: isolate;
+}
+.review-lux::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gradient-foil);
+  opacity: 0.5;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 0;
+}

@@ -126,8 +126,21 @@ export function PatientReviews() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ type: "spring", stiffness: 150, damping: 18 }}
-          className="glass-pane relative overflow-hidden rounded-4xl p-7 sm:p-9"
+          whileHover={{ y: -4 }}
+          className="review-lux glass-pane relative overflow-hidden rounded-4xl p-7 sm:p-9"
         >
+          {/* luxurious foil sheen sweeping across the spotlight card */}
+          <motion.span
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(100deg, transparent 30%, color-mix(in oklab, white 40%, transparent) 50%, transparent 70%)",
+            }}
+            initial={{ x: "-130%" }}
+            animate={calm ? {} : { x: ["-130%", "130%"] }}
+            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 2 }}
+          />
           <motion.span
             aria-hidden
             className="absolute -right-6 -top-8 text-primary/15"
@@ -199,9 +212,11 @@ export function PatientReviews() {
               whileInView={{ opacity: 1, x: 0, rotate: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ type: "spring", stiffness: 210, damping: 20, delay: i * 0.09 }}
-              whileHover={{ y: -5, rotate: i % 2 ? 1 : -1 }}
+              whileHover={{ y: -6, rotate: i % 2 ? 1 : -1, scale: 1.02 }}
               onHoverStart={() => setIndex(i)}
-              className="glass-card cursor-pointer rounded-3xl p-4"
+              className={`review-lux glass-card cursor-pointer rounded-3xl p-4 transition-shadow ${
+                i === index ? "ring-1 ring-primary/40" : ""
+              }`}
             >
               <div className="flex items-center gap-3">
                 <span
