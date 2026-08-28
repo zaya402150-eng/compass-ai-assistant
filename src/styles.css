@@ -419,9 +419,9 @@
 }
 
 .clay-card {
-  width: 320px;
-  border-radius: 34px;
-  border: 3px solid rgba(255, 255, 255, 0.6);
+  width: 330px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
   cursor: default;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
   overflow: hidden;
@@ -435,18 +435,18 @@
   z-index: 10;
 }
 
+/* Head = clean, full-colour photo. No colour wash, no heavy scrim. */
 .clay-card-head {
   position: relative;
-  height: 180px;
-  padding: 18px;
+  height: 168px;
+  padding: 14px;
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
-  color: #fff;
   overflow: hidden;
+  background: #dfe6ef;
 }
 
-/* Full-color photo — only a soft legibility scrim sits on top, no color wash. */
 .clay-card-img {
   position: absolute;
   inset: 0;
@@ -456,56 +456,60 @@
   pointer-events: none;
 }
 
+/* only a whisper of shade at the very top so the badges stay readable */
 .clay-card-head::after {
   content: "";
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(12, 18, 26, 0.72) 0%, rgba(12, 18, 26, 0.18) 48%, rgba(12, 18, 26, 0.28) 100%);
+  inset: 0 0 auto 0;
+  height: 74px;
+  background: linear-gradient(to bottom, rgba(10, 16, 24, 0.34), transparent);
   pointer-events: none;
 }
 
 .clay-badge {
-  padding: 5px 12px;
+  position: relative;
+  z-index: 2;
+  padding: 5px 11px;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #fff;
-  background: rgba(12, 18, 26, 0.42);
+  background: rgba(12, 18, 26, 0.5);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .clay-badge-icon {
+  position: relative;
+  z-index: 2;
   display: grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.22);
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  color: #fff;
+  background: rgba(12, 18, 26, 0.5);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.32);
 }
 
 .clay-card-title {
-  position: relative;
   font-family: var(--font-display, inherit);
-  font-size: 23px;
+  font-size: 22px;
   line-height: 1.15;
   font-weight: 800;
   letter-spacing: -0.02em;
-  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+  color: var(--clay-ink);
 }
 
 .clay-card-sub {
-  position: relative;
-  margin-top: 4px;
+  margin-top: 5px;
   font-size: 13.5px;
-  line-height: 1.35;
+  line-height: 1.45;
   font-weight: 600;
-  opacity: 0.95;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  color: var(--clay-muted);
 }
 
 .clay-card-body {
@@ -513,34 +517,38 @@
   padding: 16px 18px 18px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.04);
+  gap: 9px;
 }
 
 .clay-line {
   font-size: 13.5px;
-  line-height: 1.4;
+  line-height: 1.45;
   font-weight: 600;
-  color: var(--clay-muted);
+  color: var(--clay-ink);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: color-mix(in oklab, #ffffff 55%, transparent);
 }
 
-.clay-line svg { flex: 0 0 auto; opacity: 0.7; }
+.clay-line svg { flex: 0 0 auto; opacity: 0.65; }
 
 .clay-stats {
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: color-mix(in oklab, var(--clay-muted) 80%, transparent);
+  color: var(--clay-muted);
   padding-top: 10px;
-  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  margin-top: 2px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
+
 
 .clay-hint {
   position: absolute;
