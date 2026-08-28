@@ -220,6 +220,28 @@ export function ClinicJourney() {
       // Reduced motion: plain stacked reading order, no pinning.
       if (reduce) return;
 
+      // Measure only once fonts and the scene's images have settled — measuring
+      // too early is what makes the first couple of scrolls jump.
+      try {
+        await document.fonts?.ready;
+        const imgs = Array.from(rootRef.current.querySelectorAll("img"));
+        await Promise.all(
+          imgs.map((img) =>
+            img.complete
+              ? Promise.resolve()
+              : new Promise<void>((res) => {
+                  img.addEventListener("load", () => res(), { once: true });
+                  img.addEventListener("error", () => res(), { once: true });
+                }),
+          ),
+        );
+      } catch {
+        /* measurement fallback below still runs */
+      }
+      if (cancelled || !rootRef.current) return;
+
+
+
       ctx = gsap.context(() => {
         const root = rootRef.current!;
         const canvas = root.querySelector<HTMLElement>(".clay-canvas")!;
