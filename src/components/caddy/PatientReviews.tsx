@@ -152,17 +152,18 @@ export function PatientReviews() {
               </p>
               <footer className="mt-6 flex items-center gap-3">
                 <motion.span
-                  className="grid size-11 place-items-center overflow-hidden rounded-2xl"
-                  style={{ background: TINT_BG[active.tint] }}
+                  className="grid size-11 place-items-center overflow-hidden rounded-2xl border border-border"
                   animate={calm ? {} : { rotate: [-4, 4, -4] }}
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <img
                     src={patientAvatar}
                     alt={`${active.name}, Caddy Care patient`}
-                    className="size-full object-cover mix-blend-luminosity"
+                    className="size-full object-cover"
                     loading="lazy"
                   />
+                </motion.span>
+
                 </motion.span>
                 <div>
                   <p className="text-sm font-extrabold">{active.name}</p>
