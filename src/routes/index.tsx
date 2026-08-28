@@ -153,31 +153,84 @@ function Home() {
           <DoctorCarousel />
         </div>
 
-        {/* CTA */}
+        {/* CTA — Caddy is listening */}
         <motion.section
           initial={{ opacity: 0, y: 36 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ type: "spring", stiffness: 150, damping: 18 }}
-          className="glass-card mt-16 grid items-center gap-8 overflow-hidden rounded-4xl p-8 lg:grid-cols-[1fr_0.9fr]"
+          className="glass-pane relative mt-16 grid items-center gap-8 overflow-hidden rounded-4xl p-8 lg:grid-cols-[1fr_0.9fr]"
         >
-          <div className="text-center lg:text-left">
-            <h2 className="text-3xl font-extrabold">Caddy is listening</h2>
-            <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground lg:mx-0">
-              Say the symptom, Caddy rings the right specialist and holds the line — voice booking
-              arrives with your first visit.
+          <motion.span
+            aria-hidden
+            className="pointer-events-none absolute -left-24 -top-24 size-72 rounded-full blur-3xl"
+            style={{ background: "var(--gradient-care)", opacity: 0.18 }}
+            animate={{ scale: [1, 1.18, 1], opacity: [0.12, 0.24, 0.12] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <div className="relative text-center lg:text-left">
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1.5 text-[0.65rem] font-extrabold uppercase tracking-[0.2em] text-primary">
+              <motion.span
+                className="size-2 rounded-full bg-primary"
+                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.4, 1] }}
+                transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+              />
+              Live voice agent
+            </span>
+            <h2 className="mt-4 font-display text-[2rem] font-extrabold leading-[1.05] tracking-tight sm:text-5xl">
+              Caddy is <span className="foil-text foil-animate">listening</span>
+            </h2>
+            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground lg:mx-0">
+              Say the symptom, Caddy rings the right specialist and holds the line — booking done
+              before you finish the sentence.
             </p>
+
+            {/* animated waveform */}
+            <div className="mx-auto mt-6 flex h-10 max-w-sm items-end gap-1.5 lg:mx-0" aria-hidden>
+              {Array.from({ length: 28 }).map((_, i) => (
+                <motion.span
+                  key={i}
+                  className="w-1.5 flex-1 rounded-full bg-primary/60"
+                  animate={{ height: [8, 10 + ((i * 13) % 28), 8] }}
+                  transition={{
+                    duration: 1 + (i % 6) * 0.15,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.04,
+                  }}
+                  style={{ height: 8 }}
+                />
+              ))}
+            </div>
+
+            <div className="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start">
+              {["“Book me a dentist”", "“Where am I in the queue?”", "“Reschedule Friday”"].map(
+                (t, i) => (
+                  <motion.span
+                    key={t}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ type: "spring", stiffness: 260, damping: 20, delay: i * 0.1 }}
+                    className="glass-card rounded-full px-3.5 py-1.5 text-xs font-bold text-muted-foreground"
+                  >
+                    {t}
+                  </motion.span>
+                ),
+              )}
+            </div>
+
             <motion.button
               type="button"
               whileHover={{ y: -2 }}
               whileTap={{ y: 4 }}
               transition={{ type: "spring", stiffness: 500, damping: 18 }}
-              className="btn-3d mt-6 rounded-full bg-primary px-7 py-3 text-sm font-bold text-primary-foreground"
+              className="btn-3d mt-6 rounded-full bg-primary px-7 py-3 text-sm font-extrabold text-primary-foreground"
             >
               Talk to Caddy
             </motion.button>
           </div>
-          <CallDoctorAnimation className="mx-auto" />
+          <CallDoctorAnimation className="relative mx-auto" />
         </motion.section>
 
         {/* PATIENT REVIEWS */}
