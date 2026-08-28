@@ -75,26 +75,27 @@ const WIDE: Layout = {
 
 const ROW_Y = 300;
 const COMPACT: Layout = {
-  width: 4720,
+  width: 3260,
   height: 600,
   cards: {
-    caddy: { left: 420, top: ROW_Y },
-    answers: { left: 1040, top: ROW_Y },
-    doctor: { left: 1660, top: ROW_Y },
-    slot: { left: 2280, top: ROW_Y },
-    booked: { left: 2900, top: ROW_Y },
-    queue: { left: 3520, top: ROW_Y },
-    arrive: { left: 4140, top: ROW_Y },
+    caddy: { left: 300, top: ROW_Y },
+    answers: { left: 740, top: ROW_Y },
+    doctor: { left: 1180, top: ROW_Y },
+    slot: { left: 1620, top: ROW_Y },
+    booked: { left: 2060, top: ROW_Y },
+    queue: { left: 2500, top: ROW_Y },
+    arrive: { left: 2940, top: ROW_Y },
   },
-  startDot: { left: 120, top: ROW_Y },
-  startPill: { left: 160, top: 90 },
-  endDot: { left: 4520, top: ROW_Y },
-  endPill: { left: 4480, top: 90 },
+  startDot: { left: 90, top: ROW_Y },
+  startPill: { left: 120, top: 90 },
+  endDot: { left: 3160, top: ROW_Y },
+  endPill: { left: 3110, top: 90 },
   midDots: [],
   paths: [
-    "M 120 300 L 4520 300",
+    "M 90 300 L 3160 300",
   ],
 };
+
 
 const STEP_META: { id: string; card: CardId; label: string }[] = [
   { id: "step-caddy", card: "caddy", label: "Say hi to Caddy" },
