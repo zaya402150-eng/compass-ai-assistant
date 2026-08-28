@@ -53,11 +53,12 @@ const MARQUEE = [
 /** Bubble crest: position / size / travel / timing for each rising blob. */
 const BUBBLES = Array.from({ length: 128 }, (_, i) => ({
   position: (i / 128) * 100 + (i % 5) * 0.4,
-  size: 2 + ((i * 37) % 60) / 10,
-  distance: 6 + ((i * 53) % 45) / 5,
-  time: 2 + ((i * 29) % 40) / 10,
+  size: 1.6 + ((i * 37) % 40) / 10,
+  distance: 4 + ((i * 53) % 40) / 6,
+  time: 2.4 + ((i * 29) % 40) / 10,
   delay: -1 * (((i * 71) % 40) / 10),
 }));
+
 
 export function SiteFooter() {
   const calm = useReducedMotion();
