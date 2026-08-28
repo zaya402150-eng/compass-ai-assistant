@@ -249,8 +249,12 @@ export function ClinicJourney() {
         // Fit the canvas height into the viewport so narrow screens keep the node flow.
         const chrome = compact ? 190 : 60;
         const avail = Math.max(240, window.innerHeight - chrome);
-        const scale = Math.min(1, avail / layout.height);
+        const widthCap = compact
+          ? Math.max(0.5, (window.innerWidth - 48) / 330)
+          : 1;
+        const scale = Math.min(1, avail / layout.height, widthCap);
         gsap.set(canvas, { yPercent: -50, scale, transformOrigin: "left center", x: 0 });
+
 
         const scaledWidth = layout.width * scale;
         const scrollMax = Math.max(1, scaledWidth - window.innerWidth + (compact ? 40 : 160));
