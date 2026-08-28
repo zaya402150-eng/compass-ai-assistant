@@ -78,29 +78,8 @@ export function SiteFooter() {
         </defs>
       </svg>
 
-      {/* marquee ribbon */}
-      <div
-        className="relative z-2 overflow-hidden py-2.5"
-        style={{ background: "var(--gradient-care)" }}
-        aria-hidden
-      >
-        <motion.div
-          className="flex w-max gap-6 whitespace-nowrap"
-          animate={calm ? {} : { x: ["0%", "-50%"] }}
-          transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
-        >
-          {[...MARQUEE, ...MARQUEE, ...MARQUEE, ...MARQUEE].map((word, i) => (
-            <span
-              key={`${word}-${i}`}
-              className="font-display text-xs font-extrabold uppercase tracking-[0.22em] text-primary-foreground/90"
-            >
-              {word} <span className="opacity-60">✦</span>
-            </span>
-          ))}
-        </motion.div>
-      </div>
-
-      <div className="relative h-16">
+      {/* rising bubble crest */}
+      <div className="relative h-10">
         <div aria-hidden className="footer-bubbles">
           {BUBBLES.map((b, i) => (
             <div
@@ -121,6 +100,29 @@ export function SiteFooter() {
       </div>
 
       <div className="footer-body">
+        {/* marquee ribbon */}
+        <div
+          className="relative overflow-hidden py-2.5"
+          style={{ background: "color-mix(in oklab, white 12%, transparent)" }}
+          aria-hidden
+        >
+          <motion.div
+            className="flex w-max gap-6 whitespace-nowrap"
+            animate={calm ? {} : { x: ["0%", "-50%"] }}
+            transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
+          >
+            {[...MARQUEE, ...MARQUEE, ...MARQUEE, ...MARQUEE].map((word, i) => (
+              <span
+                key={`${word}-${i}`}
+                className="font-display text-xs font-extrabold uppercase tracking-[0.22em] opacity-85"
+              >
+                {word} <span className="opacity-60">✦</span>
+              </span>
+            ))}
+          </motion.div>
+        </div>
+
+
         <div className="mx-auto w-full max-w-[1500px] px-6 pb-8 pt-10 sm:px-12 lg:px-20">
           <div className="grid gap-12 lg:grid-cols-[1.15fr_2.6fr]">
             <div>
