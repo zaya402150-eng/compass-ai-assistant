@@ -331,30 +331,31 @@ export function ClinicJourney() {
 
         const vw = window.innerWidth;
         root.querySelectorAll<HTMLElement>(".gs-reveal").forEach((el) => {
-          // Anything already inside the first frame must be painted immediately —
-          // otherwise the section opens on bare connector lines.
-          if (el.getBoundingClientRect().left < vw - 40) {
-            gsap.set(el, { scale: 1, opacity: 1 });
+          // Use layout coordinates (not live rects) so the decision is identical on
+          // every refresh: anything inside the first frame is painted immediately,
+          // otherwise the section would open on bare connector lines.
+          const layoutLeft = el.offsetLeft * scale;
+          if (layoutLeft < vw - 40) {
+            gsap.set(el, { scale: 1, opacity: 1, clearProps: "willChange" });
             return;
           }
-          gsap.fromTo(
-            el,
-            { scale: 0.72, opacity: 0 },
-            {
-              scale: 1,
-              opacity: 1,
-              duration: 0.5,
-              ease: "power3.out",
-              force3D: true,
-              scrollTrigger: {
-                trigger: el,
-                containerAnimation: horizontal,
-                start: "left right-=100",
-                toggleActions: "play none none reverse",
-              },
+          gsap.set(el, { scale: 0.72, opacity: 0 });
+          gsap.to(el, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.5,
+            ease: "power3.out",
+            force3D: true,
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: el,
+              containerAnimation: horizontal,
+              start: "left right-=100",
+              toggleActions: "play none none reverse",
             },
-          );
+          });
         });
+
       }, rootRef);
 
       // Late layout shifts (fonts, images, sticky nav) are the usual cause of the
