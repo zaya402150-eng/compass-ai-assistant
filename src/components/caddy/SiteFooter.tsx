@@ -194,9 +194,10 @@ export function SiteFooter() {
           </div>
 
           <div
-            className="mt-12 flex flex-wrap items-center justify-between gap-4 pt-6 text-xs font-semibold opacity-80"
+            className="mt-12 flex flex-wrap items-center justify-between gap-4 pt-6 pb-20 text-xs font-semibold opacity-80 sm:pb-6 lg:pr-56"
             style={{ borderTop: "1px solid color-mix(in oklab, white 20%, transparent)" }}
           >
+
             <p>© {new Date().getFullYear()} Caddy Care. Built for clinics that care.</p>
             <p className="inline-flex items-center gap-1.5">
               Made with
