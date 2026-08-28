@@ -909,3 +909,9 @@
   pointer-events: none;
   z-index: 0;
 }
+
+/* ---- luxe partner logo marquee ---- */
+.logo-marquee {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}

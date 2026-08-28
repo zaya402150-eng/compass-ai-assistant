@@ -233,8 +233,13 @@ function Home() {
           <CallDoctorAnimation className="relative mx-auto" />
         </motion.section>
 
+        {/* TRUSTED CLINIC LOGOS */}
+        <LogoMarquee />
+
         {/* PATIENT REVIEWS */}
         <PatientReviews />
+
+
 
       </div>
 
