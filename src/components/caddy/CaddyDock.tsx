@@ -140,22 +140,69 @@ export function CaddyDock() {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Close Caddy assistant" : "Open Caddy assistant"}
-        whileHover={{ y: -3 }}
+        whileHover={{ y: -3, scale: 1.03 }}
         whileTap={{ scale: 0.94 }}
         transition={{ type: "spring", stiffness: 420, damping: 18 }}
-        className="relative inline-flex items-center gap-2.5 rounded-full py-3 pl-3 pr-5 text-sm font-extrabold text-primary-foreground shadow-[var(--shadow-glow)]"
-        style={{ background: "var(--gradient-care)" }}
+        className="caddy-magic-btn relative inline-flex items-center gap-3 rounded-full py-2.5 pl-2.5 pr-5 text-sm font-extrabold text-primary-foreground"
       >
+        {/* rotating foil aura */}
         <motion.span
           aria-hidden
-          className="absolute inset-0 rounded-full bg-primary/40"
-          animate={calm ? {} : { scale: [1, 1.28], opacity: [0.5, 0] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
+          className="absolute -inset-[2px] rounded-full"
+          style={{ background: "var(--gradient-foil)", filter: "blur(8px)", opacity: 0.75 }}
+          animate={calm ? {} : { rotate: 360 }}
+          transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
         />
-        <span className="relative grid size-9 place-items-center rounded-full bg-white/22">
-          {open ? <X className="size-4.5" /> : <Sparkles className="size-4.5" />}
+        <span
+          aria-hidden
+          className="absolute inset-0 rounded-full"
+          style={{ background: "var(--gradient-care)" }}
+        />
+        {/* breathing halo */}
+        <motion.span
+          aria-hidden
+          className="absolute inset-0 rounded-full border border-white/50"
+          animate={calm ? {} : { scale: [1, 1.35], opacity: [0.55, 0] }}
+          transition={{ duration: 2.6, repeat: Infinity, ease: "easeOut" }}
+        />
+
+        {/* orb face */}
+        <span className="relative grid size-10 place-items-center overflow-hidden rounded-full bg-white/20 backdrop-blur-sm">
+          <motion.span
+            aria-hidden
+            className="absolute inset-0"
+            style={{ background: "var(--gradient-foil)", opacity: 0.5 }}
+            animate={calm ? {} : { rotate: -360 }}
+            transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.span
+            className="relative"
+            animate={calm || open ? {} : { scale: [1, 1.15, 1], rotate: [0, 10, -8, 0] }}
+            transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            {open ? <X className="size-4.5" /> : <Sparkles className="size-4.5" />}
+          </motion.span>
         </span>
-        <span className="relative hidden sm:inline">Ask Caddy</span>
+
+        {/* floating sparkles */}
+        {!calm &&
+          [0, 1, 2].map((i) => (
+            <motion.span
+              key={i}
+              aria-hidden
+              className="absolute size-1.5 rounded-full bg-white"
+              style={{ left: 14 + i * 12, top: 8 }}
+              animate={{ y: [-2, -18, -2], opacity: [0, 1, 0], scale: [0.6, 1, 0.6] }}
+              transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.7, ease: "easeInOut" }}
+            />
+          ))}
+
+        <span className="relative hidden sm:flex flex-col items-start leading-none">
+          <span>Ask Caddy</span>
+          <span className="mt-1 text-[0.6rem] font-bold uppercase tracking-[0.18em] opacity-80">
+            Voice booking
+          </span>
+        </span>
       </motion.button>
     </div>
   );
