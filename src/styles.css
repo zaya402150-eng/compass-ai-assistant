@@ -880,3 +880,12 @@
   border: 1px solid color-mix(in oklab, var(--care) 22%, transparent);
   box-shadow: var(--shadow-card-hover);
 }
+
+/* Sticky Caddy assistant launcher */
+.caddy-magic-btn {
+  isolation: isolate;
+  box-shadow: var(--shadow-glow), 0 12px 30px -12px color-mix(in oklab, var(--care) 60%, transparent);
+}
+.caddy-magic-btn > * {
+  z-index: 1;
+}
