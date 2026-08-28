@@ -16,6 +16,8 @@ import journeyChat from "@/assets/journey-chat.jpg";
 import journeyDoctor from "@/assets/journey-doctor.jpg";
 import journeyBooked from "@/assets/journey-booked.jpg";
 import journeyQueue from "@/assets/journey-queue.jpg";
+import journeyAnswers from "@/assets/journey-answers.jpg";
+import journeySlot from "@/assets/journey-slot.jpg";
 import journeyArrive from "@/assets/journey-arrive.jpg";
 
 type Pos = { left: number; top: number };
@@ -38,38 +40,38 @@ type Layout = {
 };
 
 const WIDE: Layout = {
-  width: 3400,
-  height: 1000,
+  width: 3520,
+  height: 1160,
   cards: {
     caddy: { left: 400, top: 500 },
-    answers: { left: 1060, top: 180 },
-    doctor: { left: 1060, top: 500 },
-    slot: { left: 1060, top: 820 },
-    booked: { left: 1700, top: 500 },
-    queue: { left: 2350, top: 500 },
-    arrive: { left: 2950, top: 500 },
+    answers: { left: 1120, top: 120 },
+    doctor: { left: 1120, top: 500 },
+    slot: { left: 1120, top: 880 },
+    booked: { left: 1790, top: 500 },
+    queue: { left: 2440, top: 500 },
+    arrive: { left: 3040, top: 500 },
   },
   startDot: { left: 120, top: 500 },
   startPill: { left: 120, top: 380 },
-  endDot: { left: 3260, top: 500 },
-  endPill: { left: 3260, top: 380 },
+  endDot: { left: 3380, top: 500 },
+  endPill: { left: 3380, top: 380 },
   midDots: [
     { left: 700, top: 500 },
-    { left: 1400, top: 500 },
+    { left: 1500, top: 500 },
   ],
   paths: [
     "M 120 500 L 250 500",
     "M 550 500 L 700 500",
-    "M 700 500 C 800 500, 820 180, 910 180",
-    "M 700 500 L 910 500",
-    "M 700 500 C 800 500, 820 820, 910 820",
-    "M 1210 180 C 1300 180, 1320 500, 1400 500",
-    "M 1210 500 L 1400 500",
-    "M 1210 820 C 1300 820, 1320 500, 1400 500",
-    "M 1400 500 L 1550 500",
-    "M 1850 500 L 2200 500",
-    "M 2500 500 L 2800 500",
-    "M 3100 500 L 3260 500",
+    "M 700 500 C 830 500, 850 120, 970 120",
+    "M 700 500 L 970 500",
+    "M 700 500 C 830 500, 850 880, 970 880",
+    "M 1270 120 C 1380 120, 1400 500, 1500 500",
+    "M 1270 500 L 1500 500",
+    "M 1270 880 C 1380 880, 1400 500, 1500 500",
+    "M 1500 500 L 1620 500",
+    "M 1940 500 L 2290 500",
+    "M 2590 500 L 2890 500",
+    "M 3190 500 L 3380 500",
   ],
 };
 
@@ -327,7 +329,14 @@ export function ClinicJourney() {
           );
         });
 
+        const vw = window.innerWidth;
         root.querySelectorAll<HTMLElement>(".gs-reveal").forEach((el) => {
+          // Anything already inside the first frame must be painted immediately —
+          // otherwise the section opens on bare connector lines.
+          if (el.getBoundingClientRect().left < vw - 40) {
+            gsap.set(el, { scale: 1, opacity: 1 });
+            return;
+          }
           gsap.fromTo(
             el,
             { scale: 0.72, opacity: 0 },
@@ -482,7 +491,7 @@ export function ClinicJourney() {
             icon={<Sparkles size={18} />}
             title="Get real answers"
             sub="Symptoms, prices, what to bring"
-            image={journeyChat}
+            image={journeyAnswers}
             imageAlt="Caddy answering questions in chat"
           >
             <Line>
@@ -530,7 +539,7 @@ export function ClinicJourney() {
             icon={<Clock3 size={18} />}
             title="Pick a time"
             sub="Real open slots, not a callback"
-            image={journeyBooked}
+            image={journeySlot}
             imageAlt="Calendar with open appointment times"
           >
             <Line>
