@@ -163,8 +163,6 @@ export function PatientReviews() {
                     loading="lazy"
                   />
                 </motion.span>
-
-                </motion.span>
                 <div>
                   <p className="text-sm font-extrabold">{active.name}</p>
                   <p className="text-xs text-muted-foreground">{active.meta}</p>
