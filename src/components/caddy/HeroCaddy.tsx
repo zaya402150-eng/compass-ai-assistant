@@ -37,10 +37,11 @@ export function HeroCaddy() {
         {/* breathing glow halo */}
         <motion.div
           aria-hidden
-          className="absolute inset-6 rounded-full bg-primary/30 blur-3xl"
-          animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.8, 0.5] }}
+          className="absolute inset-8 rounded-full bg-secondary/70 blur-3xl"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.45, 0.65, 0.45] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         />
+
         <motion.div
           aria-hidden
           className="absolute inset-10 rounded-full border border-primary/25"
