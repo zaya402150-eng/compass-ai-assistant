@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { HeroCaddy } from "@/components/caddy/HeroCaddy";
 import { SiteNav } from "@/components/caddy/SiteNav";
-import { SpecialtyFinder } from "@/components/caddy/SpecialtyFinder";
 import { PatientReviews } from "@/components/caddy/PatientReviews";
 import { DoctorCarousel } from "@/components/caddy/DoctorCarousel";
 import { QueueTeaser } from "@/components/caddy/QueueTeaser";
@@ -143,12 +142,6 @@ function Home() {
         <div className="pt-10">
           <QueueToast demo position={4} doctorName="Dr. Ahmed" nowServing={1} />
         </div>
-
-        {/* SPECIALIZATIONS */}
-        <section className="pt-20">
-          <SpecialtyFinder />
-        </section>
-
 
         {/* LIVE QUEUE */}
         <div className="pt-14">

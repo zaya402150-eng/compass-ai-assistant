@@ -7,6 +7,7 @@ import {
   ChevronRight,
   Clock,
   MapPin,
+  Search,
   Star,
 } from "lucide-react";
 import { DOCTORS, type Doctor } from "@/lib/home-data";
@@ -163,8 +164,12 @@ function DoctorCard({
   );
 }
 
+const FILTERS = ["All", "Dentist", "Physician", "Skin", "Pediatrics", "Cardiology", "Eye care"];
+
 export function DoctorCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState("All");
   const [edges, setEdges] = useState({ start: true, end: false });
   const { scrollXProgress } = useScroll({ container: trackRef, axis: "x" });
 
@@ -187,6 +192,14 @@ export function DoctorCarousel() {
       ro.disconnect();
     };
   }, [measure]);
+
+  const q = query.trim().toLowerCase();
+  const visible = DOCTORS.filter((d) => {
+    const hay = `${d.name} ${d.specialty} ${d.clinic} ${d.tags.join(" ")}`.toLowerCase();
+    const matchQ = !q || hay.includes(q);
+    const matchF = filter === "All" || hay.includes(filter.toLowerCase().replace(" care", ""));
+    return matchQ && matchF;
+  });
 
   const scrollBy = (dir: -1 | 1) => {
     const el = trackRef.current;
@@ -249,7 +262,7 @@ export function DoctorCarousel() {
             }}
             className="max-w-md text-sm text-muted-foreground"
           >
-            Swipe or use the arrows — Caddy shuffles the deck for you.
+            Search a name, a speciality or a clinic — Caddy shuffles the deck for you.
           </motion.p>
         </div>
 
@@ -261,9 +274,62 @@ export function DoctorCarousel() {
           className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-muted-foreground"
         >
           <span className="size-2 animate-pulse rounded-full bg-primary" />
-          {DOCTORS.length} available now
+          {visible.length} available now
         </motion.span>
       </motion.header>
+
+      {/* search + quick filters */}
+      <motion.div
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ type: "spring", stiffness: 170, damping: 20 }}
+        className="space-y-3"
+      >
+        <label className="glass-card flex items-center gap-3 rounded-full px-4 py-3">
+          <Search aria-hidden className="size-4 shrink-0 text-primary" strokeWidth={3} />
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search doctors, specialities or clinics"
+            aria-label="Search doctors"
+            className="w-full bg-transparent text-sm font-semibold outline-none placeholder:text-muted-foreground"
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              className="text-xs font-bold text-muted-foreground hover:text-foreground"
+            >
+              Clear
+            </button>
+          )}
+        </label>
+
+        <div className="flex flex-wrap gap-2">
+          {FILTERS.map((f) => {
+            const on = f === filter;
+            return (
+              <motion.button
+                key={f}
+                type="button"
+                onClick={() => setFilter(f)}
+                aria-pressed={on}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: "spring", stiffness: 420, damping: 20 }}
+                className={`rounded-full border px-3.5 py-1.5 text-xs font-extrabold transition-colors ${
+                  on
+                    ? "border-transparent bg-primary text-primary-foreground"
+                    : "border-border bg-card text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {f}
+              </motion.button>
+            );
+          })}
+        </div>
+      </motion.div>
 
       <div className="relative">
         <div
@@ -272,12 +338,12 @@ export function DoctorCarousel() {
           style={{ scrollbarWidth: "none" }}
         >
           <div className="flex items-stretch gap-5">
-            {DOCTORS.map((d, i) => (
+            {visible.map((d, i) => (
               <DoctorCard
                 key={d.id}
                 doctor={d}
                 index={i}
-                total={DOCTORS.length}
+                total={visible.length}
                 progress={scrollXProgress}
               />
             ))}
