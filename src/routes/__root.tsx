@@ -131,7 +131,9 @@ function RootComponent() {
           <BootLoader />
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
+          <CaddyDock />
         </MotionConfig>
+
       </CaddyProvider>
     </QueryClientProvider>
   );
