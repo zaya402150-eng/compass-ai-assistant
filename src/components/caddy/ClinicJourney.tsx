@@ -144,22 +144,23 @@ function Card({
             className="clay-card-img"
           />
         )}
-        <div className="relative z-10 flex items-start justify-between">
-          <div className="flex gap-2">
-            <span className="clay-badge">{step}</span>
-            <span className="clay-badge">{chip}</span>
-          </div>
-          <div className="clay-badge-icon">{icon}</div>
+        <div className="flex gap-2">
+          <span className="clay-badge">{step}</span>
+          <span className="clay-badge">{chip}</span>
         </div>
-        <div className="relative z-10">
+        <div className="clay-badge-icon">{icon}</div>
+      </div>
+      <div className="clay-card-body">
+        <div>
           <div className="clay-card-title">{title}</div>
           <div className="clay-card-sub">{sub}</div>
         </div>
+        {children}
       </div>
-      <div className="clay-card-body">{children}</div>
     </div>
   );
 }
+
 
 function Line({ children }: { children: ReactNode }) {
   return <div className="clay-line">{children}</div>;
